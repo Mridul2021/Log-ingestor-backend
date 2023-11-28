@@ -1,8 +1,6 @@
 const User = require('../models/Schema');
 const csv=require("fast-csv");
 const fs=require("fs")
-const BASE_URL=process.env.BASE_URL;
-
 //register logs
 exports.userpost = async (req, res) => {
     try {
@@ -102,7 +100,7 @@ exports.userExport = async (req, res) => {
 
         writablestream.on("finish", function () {
             res.json({
-                downloadUrl: `${BASE_URL}/files/export/logs.csv`,
+                downloadUrl: `https://log-ingestor-backend.onrender.com/files/export/logs.csv`,
             });
         });
         if (usersdata.length > 0) {
