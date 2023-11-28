@@ -100,7 +100,7 @@ exports.userExport = async (req, res) => {
 
         writablestream.on("finish", function () {
             res.json({
-                downloadUrl: `https://log-ingestor-backend.onrender.com/files/export/logs.csv`,
+                downloadUrl: `https://log-ingestor-backend.onrender.com//files/export/logs.csv`,
             });
         });
         if (usersdata.length > 0) {
