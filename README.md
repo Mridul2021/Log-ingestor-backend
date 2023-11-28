@@ -11,6 +11,7 @@ Complete Mern Stack Application for managing and accessing log files. The logs f
 host url- https://logiingestor.onrender.com/
 
 Sample log data format:
+
 {
 	"level": "error",
 	"message": "Failed to connect to DB",
