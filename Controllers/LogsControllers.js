@@ -1,4 +1,3 @@
-const path = require('path');
 const User = require('../models/Schema');
 const csv=require("fast-csv");
 const fs=require("fs")
@@ -85,42 +84,43 @@ exports.userExport = async (req, res) => {
 
         const csvStream = csv.format({ headers: true });
 
-        // Use absolute paths and path.join to ensure correct paths
-        const baseDir = path.join(__dirname, 'public', 'files', 'export');
-        const filePath = path.join(baseDir, 'logs.csv');
-
-        if (!fs.existsSync(baseDir)) {
-            fs.mkdirSync(baseDir, { recursive: true });
+        if (!fs.existsSync("public/files/export/")) {
+            if (!fs.existsSync("public/files")) {
+                fs.mkdirSync("public/files/");
+            }
+            if (!fs.existsSync("public/files/export")) {
+                fs.mkdirSync("./public/files/export/");
+            }
         }
 
-        const writablestream = fs.createWriteStream(filePath);
+        const writablestream = fs.createWriteStream(
+            "public/files/export/logs.csv"
+        );
 
         csvStream.pipe(writablestream);
 
-        writablestream.on('finish', function () {
+        writablestream.on("finish", function () {
             res.json({
                 downloadUrl: `${BASE_URL}/files/export/logs.csv`,
             });
         });
-
         if (usersdata.length > 0) {
-            usersdata.forEach((user) => {
+            usersdata.map((User) => {
                 csvStream.write({
-                    level: user.level || '-',
-                    message: user.message || '-',
-                    resourceId: user.resourceId || '-',
-                    timestamp: user.timestamp || '-',
-                    traceId: user.traceId || '-',
-                    spanId: user.spanId || '-',
-                    commit: user.commit || '-',
-                });
-            });
+                    level: User.level ? User.level : "-",
+                    message: User.message ? User.message : "-",
+                    resourceId: User.resourceId ? User.resourceId : "-",
+                    timestamp: User.timestamp ? User.timestamp : "-",
+                    traceId: User.traceId ? User.traceId : "-",
+                    spanId: User.spanId ? User.spanId : "-",
+                    commit: User.commit ? User.commit : "-",
+                })
+            })
         }
-
         csvStream.end();
         writablestream.end();
 
     } catch (error) {
-        res.status(401).json(error);
+        res.status(401).json(error)
     }
-};
+}
