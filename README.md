@@ -13,7 +13,7 @@ host url- https://logiingestor.onrender.com/
 Sample log data format:
 
 {
-	"level": "error",
+	"level": "error",<br />
 	"message": "Failed to connect to DB",
     	"resourceId": "server-1234",
 	"timestamp": "2023-09-15T08:00:00Z",
