@@ -10,6 +10,21 @@
 Complete Mern Stack Application for managing and accessing log files. The logs files, can ingested (in the log ingestor) over HTTP, on port 3000. I have used thundercliend(can also use postman) to send the post request on port 3000. The injected log files can be seen on the frontend part of the application. 
 host url- https://logiingestor.onrender.com/
 
+Sample log data format:
+{
+	"level": "error",
+	"message": "Failed to connect to DB",
+    "resourceId": "server-1234",
+	"timestamp": "2023-09-15T08:00:00Z",
+	"traceId": "abc-xyz-123",
+    "spanId": "span-456",
+    "commit": "5e5342f",
+    "metadata": {
+        "parentResourceId": "server-0987"
+    }
+}
+
+
 The key features are given below-
 
 ## Features
